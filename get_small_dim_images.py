@@ -57,7 +57,7 @@ def _copy_jpg_on_filename(root_folder,output_folder,wanted_files_txt):
 			if file in wanted_files:
 				copyfile(os.path.join(root_folder,file),os.path.join(output_folder,file))
 
-def _traverse_folders_spark(root_folder,output_folder,wanted_files):
+def _traverse_folders_spark(root_folder,output_folder,wanted_files="all_cut_jpg_filenames.txt"):
 	'''
 	function to traverse a folder structure and run a function in each folder
 	'''
