@@ -57,17 +57,16 @@ def _copy_jpg_on_filename(root_folder,output_folder,wanted_files_txt):
 			if file in wanted_files:
 				copyfile(os.path.join(root_folder,file),os.path.join(output_folder,file))
 
-def _traverse_folders_spark(root_folder,output_folder):
+def _traverse_folders_spark(root_folder,output_folder,wanted_files):
 	'''
 	function to traverse a folder structure and run a function in each folder
 	'''
 	rootFolderRDD = sc.parallelize(os.listdir(root_folder))
 	#placeholderRDD = rootFolderRDD.map(lambda x: _copy_jpg_on_dim(x,output_folder)).collect()
-	wanted_files = '/Users/markostamenovic/code/hack-the-snacks/all_cut_jpg_filenames.txt'
 	placeholderRDD = rootFolderRDD.map(lambda x: _copy_jpg_on_filename(x,output_folder,wanted_files)).collect()
 
 if __name__ == "__main__":
 	from pyspark import SparkContext
 	sc = SparkContext()
 	print("Executing as main program")
-	_traverse_folders_spark(sys.argv[1],sys.argv[2])
+	_traverse_folders_spark(sys.argv[1],sys.argv[2],sys.arg[3])
